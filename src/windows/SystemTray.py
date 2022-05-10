@@ -1,30 +1,34 @@
-from PySide6.QtGui import QIcon, QAction
-from PySide6.QtWidgets import QSystemTrayIcon, QMenu
+import asyncio
 
-def setup(tray):
-    # Create the icon
-    icon = QIcon("assets/Tomatotorrent-256.png")
-    tray.setIcon(icon)
-    tray.setVisible(True)
-    tray.setToolTip("A Tooltip")
+from PyQt6.QtGui import QIcon, QAction
+from PyQt6.QtWidgets import QMenu, QSystemTrayIcon
+from rumps import rumps
 
-    # Create the Tray Menu
-    menu = QMenu()
 
-    action = QAction("A Menu Item")
-    menu.addAction(action)
-    # menu.triggered.connect(self.doMenuItem)
+class SystemTrayIcon(QSystemTrayIcon):
 
-    quit = QAction("Quit")
-    menu.addAction(quit)
-    tray.setContextMenu(menu)
+    def __init__(self, icon, parent=None):
+        QSystemTrayIcon.__init__(self, icon, parent)
+        menu = QMenu(parent)
+        changeicon = menu.addAction("Update")
+        exitAction = menu.addAction("Exit")
+        self.setContextMenu(menu)
+        # exitAction.triggered.connect(QtGui.qApp.quit)
+        changeicon.triggered.connect(self.updateIcon)
 
-    return menu
-#
-# class SystemTray():
-#     def __init__(self):
-#         tray = QSystemTrayIcon()
-#
-#
-#     def doMenuItem(self):
-#         self.showMessage('Tomodoro!', 'The Pampelmousse are Vert!')
+    def updateIcon(self):
+        self.setIcon(QIcon("assets/Tomato-256.png"))
+
+
+class MacosTrayIcon(rumps.App):
+    def __init__(self):
+        super(MacosTrayIcon, self).__init__('')
+        self.menu = ["Update"]
+        self.icon = "assets/Tomatotorrent-256.png"
+        self.title = "Tomato!"
+
+    @rumps.clicked("Update")
+    def updateicon(self, _):
+        print("Awesome title", "amazing subtitle", "hi!!1")
+        self.icon = "assets/Tomato-256.png"
+

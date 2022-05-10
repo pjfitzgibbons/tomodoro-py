@@ -1,2 +1,13 @@
-wxPython
-zope.event
+# For HLC Timestamp logic
+mmh3~=3.0.0
+
+reactivex~=4.0.0
+PyQt6~=6.3.0
+sqlalchemy~=1.4.36
+alembic
+PySide6~=6.3.0
+wxPython~=4.1.1
+rumps~=0.3.0
+
+# for testing
+time-machine
