@@ -4,6 +4,7 @@ mmh3~=3.0.0
 reactivex~=4.0.0
 PyQt6~=6.3.0
 sqlalchemy~=1.4.36
+git+https://github.com/sqlalchemy/alembic.git@main#egg=alembic
 alembic
 PySide6~=6.3.0
 wxPython~=4.1.1
